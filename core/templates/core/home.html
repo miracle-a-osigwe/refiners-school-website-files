@@ -1,0 +1,220 @@
+{% extends "main_base.html" %}
+{% load i18n static %}
+{% block title %}
+    Welcome to Refiners Schools Website.
+{% endblock title %}
+
+{% block header %}
+    {{ block.super }}
+    {% comment %} <script src=" {% static "core/js/content.js" %}"></script> {% endcomment %}
+{% endblock header %}
+
+<!-- Login and admin page should not be accessible from the main website interface -->
+
+{% block usertools %}
+    <div id="home-button">
+        {% block home_tag %}
+            <div class="home_tag home-header">
+                <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+            </div>
+        {% endblock home_tag %}
+        {% block aboutus_tag %}
+            <div class="about_us_tag home-header">
+                <a href="{% url 'core:about' %}">About Us</a>
+            </div>
+        {% endblock aboutus_tag %}
+        {% block admission_tag %}
+            <div class="admission_tag home-header">
+                <a href="{% url 'core:admission' %}">Admission</a>
+            </div>
+        {% endblock admission_tag %}
+        {% block academic_tag %}
+            <div class="academic_tag home-header">
+                <a href="{% url 'core:academics' %}">Academics</a>
+            </div>
+        {% endblock academic_tag %}
+        {% block gallery_tag %}
+            <div class="gallery_tag home-header">
+                <a href="{% url 'core:gallery' %}">Gallery</a>
+            </div>
+        {% endblock gallery_tag %}
+    </div>
+    {% block breadcrumbs %}{% endblock %}
+
+{% endblock usertools %}
+{% block messages %}{% endblock messages %}
+
+{% if homepage_images %}
+    {% block visual %}
+        {% comment %} {% block message %}
+            {% if message %}
+                <h2 id="message-id">
+                    {{ message }}
+                </h2>
+            {% endif %}
+        {% endblock message %} {% endcomment %}
+        <div id="gallery-container">
+            <div class="content-slider">
+                {% for image_pair in homepage_images %}
+                    {% comment %} {% if "media/" in image.img %}{{ image.img.replace("media/", "") }} {% endif %} {% endcomment %}
+                    {% for image in image_pair %}
+                        {% if image %}
+                            {% comment %} <div class="content2"> {% endcomment %}
+                            <div class="image-section">
+                                <img class="img-class" src={{ media_url }}/{{ image.img }} alt="{{ image.img_tag }}">
+                                <div class="img-title"> 
+                                    <h2>{{ image.img_title | upper }} </h2>
+                                    <p> {{ image.img_tag }} </p>
+                                </div>
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+                {% endfor %}
+            </div>
+            {% comment %} left (&#9664;), right (&#9654;) {% endcomment %}
+            <button class="nav-button-direction" id="prev-button">^</button> <!-- Left arrow -->
+            <button class="nav-button-direction" id="next-button">^</button> <!-- Right arrow -->
+        </div>
+        {{ block.super }}
+        </br>
+    {% endblock visual %}
+{% endif %}
+
+{% block sidebar %}
+    <div class="home-sidebar">
+    </div>
+{% endblock sidebar %}
+
+{% block content %}
+    {% if popup %}
+        <div id="popup-div" class="popup-div" data-link={% url 'core:admission' %} data-image-url={{ media_url }}/{{ popup.img }} data-image-alt={{ popup.title | safe }}>
+            <script class="full-text-data" type="application/json">
+                {{ popup.img_tag | safe }}
+            </script>
+        </div>
+    {% endif %}
+    <div class="column center">
+        <div class='post-container'>
+            <div class='section-header'>
+                <h2>WELCOME TO REFINERS SCHOOLS</h2>
+            </div>
+            <div id='post-main'>
+                {% if about_us %}
+                    <div class='about_us'>
+                        <div class='about-us-tag'>
+                            <h3>{{ about_us.title | upper }}</h3>
+                            <div class="text-content" id="text-content-div" data-fulltext="">
+                                <script class="full-text-data" type="application/json">
+                                    {{ about_us.content | safe }}
+                                </script>
+                                {% comment %} {% with new_string=about_us.content|truncatewords:30|stringformat:"s"|add:" ..."|stringformat:"s" %}
+                                    <p>{{ new_string }}</p>
+                                {% endwith %} {% endcomment %}
+                                {{ about_us.content | truncatewords:20 | safe }}
+                            </div>
+                            {% comment %} {% if about_us.img %}
+                                <span>
+                                    <img src=../{{ media_url }}/{{ about_us.img }} alt="Image" class="image">
+                                </span>
+                            {% endif %} {% endcomment %}
+                        </div>
+                        <div>
+                            <a href="{% url 'core:about' %}" id="read-more">READ MORE</a>
+                        </div>
+                    </div>
+                {% endif %}
+                {% if mission %}
+                    <div class='mission'>
+                        <h3> {{ mission.title | upper }} </h3>
+                        <div  class="text-content" data-fulltext="">
+                            <script class="full-text-data" type="application/json">
+                                {{ mission.content | safe }}
+                            </script>
+                            {{ mission.content | truncatewords:20 | safe }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if vision %}
+                    <div class='vision'>
+                        <h3> {{ vision.title | upper }} </h3>
+                        <div  class="text-content" data-fulltext="">
+                            <script class="full-text-data" type="application/json">
+                                {{ vision.content | safe }}
+                            </script>
+                            {{ vision.content | truncatewords:20 | safe }}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="column center">    
+        <div class='offer-container'>
+            {% if offer %}
+                <div class='section-header'>
+                    <h2>WHAT WE OFFER</h2>
+                </div>
+                <div class='offer'>
+                    {% for item in offer %}
+                        <div class='offer-items'>
+                            <h2 class='offer-tag'> {{ item.title | upper }} </h2>
+                            <div  class="text-content" data-fulltext="">
+                                <script class="full-text-data" type="application/json">
+                                    {{ item.content | safe }}
+                                </script>
+                                {{ item.content | truncatewords:40  | safe}}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div>
+                    <a href="{% url 'core:academics' %}" id="read-more">READ MORE</a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if event %}
+    <div class="column center">
+        <div class='events'>
+                <div class='section-header'>
+                    <h2>UPCOMING EVENT</h2>
+                </div>
+                {% comment %} {% for event in events %} {% endcomment %}
+                    <div class='event'>
+                        {% if event.img %}
+                            <div class="event-img">
+                                <img class="event-image" src={{ media_url }}/{{ event.img }} alt={{ event.tag }}>
+                            </div>
+                        {% endif %}
+                        <div  class="event-div">
+                            <div class="event-title-div">
+                                <h3 class="event-title"> {{ event.title | upper }} </h3>
+                            </div>
+                            <div class="text-content event-content" data-fulltext="">
+                                <script class="full-text-data" type="application/json">
+                                    {{ event.content | safe }}
+                                </script>
+                                {{ event.content | truncatewords:20}}
+                            </div>
+                            {% if event.url %}
+                                <div class="event-url">
+                                    <hr class="url-line">
+                                    <a class="event-anchor-url" href={{ event.url }}>Click me for more info</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% comment %} {% endfor %} {% endcomment %}
+        </div>
+    </div>
+    {% endif %}
+{% endblock content %}
+
+<!--===============================================================================================-->
+<script src="{% static "core/vendor/tilt/tilt.jquery.min.js" %}"></script>
+<script >
+    $('.js-tilt').tilt({
+        scale: 1.1
+    })
+</script>
+<!--===============================================================================================-->

@@ -1,0 +1,44 @@
+{% extends 'core/home.html' %}
+{% load static %}
+
+{% comment %} <script src="{% static "core/js/gallery.js" %}"></script> {% endcomment %}
+
+{% block title %}
+    Gallery
+{% endblock title %}
+
+{% block home_tag %}
+    <div class="home_tag">
+        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+    </div>
+{% endblock home_tag %}
+
+{% block gallery_tag %}
+{% endblock %}
+
+{% block visual %}
+{% endblock %}
+
+{% block content-main %}
+    {% comment %} <div id="gallery-view"> {% endcomment %}
+        <div id="gallery">
+            {% comment %} <div class="gallery-slides"> {% endcomment %}
+                {% if event_images %}
+                    <h2 class="gallery-header">GALLERY</h2>
+                    {% for image in event_images %}
+                        <div class="gallery-image">        
+                            <img src=../{{ media_url }}/{{ image.img }} alt="School events" class="img-gallery">
+                            <div class="img-title-gallery img-title">
+                                <h2>{{ image.img_title | upper }}</h2>
+                                <p>{{ image.img_tag }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            {% comment %} </div> {% endcomment %}
+        </div>
+    {% comment %} </div> {% endcomment %}
+    {% block notice %}
+        {{ block.super }}
+    {% endblock notice %}
+{% endblock content-main %}

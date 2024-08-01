@@ -1,0 +1,9 @@
+{% extends "core/home.html" %}
+
+{% block content %}
+    <div class="popup" id="popup">
+        <div class="popup-content" id="popup-content"> {{ message }}</div>
+        <span class="popup-close" id="popup-close">Close</span>
+    </div>
+    <div class="overlay" id="overlay"></div>
+{% endblock content %}

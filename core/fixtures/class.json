@@ -1,0 +1,122 @@
+[
+    {
+        "model" : "core.class",
+        "pk" : 1,
+        "fields" : {
+            "name" : "Year 7 Emerald",
+            "section": 1,
+            "subject" : 1,
+            "teacher" : 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 2,
+        "fields": {
+            "name": "Year 7 Ruby",
+            "section": 1,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 3,
+        "fields": {
+            "name": "Year 8 Emerald",
+            "section": 1,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 4,
+        "fields": {
+            "name": "Year 8 Ruby",
+            "section": 1,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 5,
+        "fields": {
+            "name": "Year 9 Emerald",
+            "section": 1,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 6,
+        "fields": {
+            "name": "Year 9 Ruby",
+            "section": 1,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 7,
+        "fields": {
+            "name": "Year 10 Science",
+            "section": 2,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 8,
+        "fields": {
+            "name": "Year 10 Arts & Commercial",
+            "section": 2,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 9,
+        "fields": {
+            "name": "Year 11 Science",
+            "section": 2,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 10,
+        "fields": {
+            "name": "Year 11 Arts & Commercial",
+            "section": 2,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 11,
+        "fields": {
+            "name": "Year 12 Science",
+            "section": 2,
+            "subject": 1,
+            "teacher": 1
+        }
+    },
+    {
+        "model": "core.class",
+        "pk": 12,
+        "fields": {
+            "name": "Year 12 Arts & Commercial",
+            "section": 2,
+            "subject": 1,
+            "teacher": 1
+        }
+    }
+]

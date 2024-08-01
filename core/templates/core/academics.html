@@ -1,0 +1,172 @@
+{% extends 'core/home.html' %}
+{% block title %}
+    Academics
+{% endblock title %}
+
+{% block home_tag %}
+    <div class="home_tag">
+        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+    </div>
+{% endblock home_tag %}
+
+{% block visual %}
+{% endblock %}
+
+{% block academic_tag %}
+{% endblock %}
+
+{% comment %} {% block content %}
+{% endblock content %} {% endcomment %}
+
+{% block content %}
+    {% comment %} {% if academics %} {% endcomment %}
+        <div class="column academic-container center">
+            <div class="academic-welcome">
+                <h2 class="academic-main-header">REFINERS SCHOOLS CURRICULUM</h2>
+            </div>
+            <div class="academic-content">
+                {% if academic_creche %}
+                    <div class="academic-creche">
+                        {% for creche in academic_creche %}
+                            {% if "creche" in creche.title %}
+                                <div class="creche-list">
+                                    <h3 class="academic-heading">CRECHE/PRESCHOOL</h3>
+                                    <ul class="academic-list">
+                                        {% for data in creche.content %}
+                                            <li class="academic-list-items"> {{ data }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% elif "preschool" in creche.title %}
+                                <div class="creche-list">
+                                    <h3 class="academic-heading">PRE-NURSERY</h3>
+                                    <ul class="academic-list">
+                                        {% for data in creche.content %}
+                                            <li class="academic-list-items"> {{ data }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% elif "reception" in creche.title %}
+                                <div class="creche-list">
+                                    <h3 class="academic-heading">RECEPTION</h3>
+                                    <ul class="academic-list">
+                                        {% for data in creche.content %}
+                                            <li class="academic-list-items"> {{ data }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if academic_nursery %}
+                    <div class="academic-nursery">
+                        <ul class="academic-list">
+                            <h3 class="academic-heading">NURSERY SCHOOL</h3>
+                            <div class="academic-nursery-div">
+                                {% for data in academic_nursery.content %}
+                                    <li class="academic-list-items"> {{ data }} </li>
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if academic_primary %}
+                    <div class="academic-primary">
+                        {% comment %} <h3 class="academic-sub-header">PRIMARY SCHOOL</h3> {% endcomment %}
+                        {% for primary in academic_primary %}
+                            {% if "lower" in primary.title %}
+                                    <ul class="academic-list">
+                                        <h3 class="academic-heading">LOWER PRIMARY</h3>
+                                        <div class="academic-primary-div">
+                                            {% for data in primary.content %}
+                                                <li class="academic-list-items"> {{ data }} </li>
+                                            {% endfor %}
+                                        <div>
+                                    </ul>
+                            {% elif "upper" in primary.title %}
+                                    <ul class="academic-list">
+                                        <h3 class="academic-heading">UPPER PRIMARY</h3>
+                                        <div class="academic-primary-div">
+                                            {% for data in primary.content %}
+                                                <li class="academic-list-items"> {{ data }} </li>
+                                            {% endfor %}
+                                        <div>
+                                    </ul>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                {% if academic_junior %}
+                    <div class="academic-junior">
+                        <ul class="academic-list">
+                            <h3 class="academic-heading">JUNIOR SCHOOL</h3>
+                            <div class="junior-subjects">
+                                {% for data in academic_junior.content %}
+                                    <li class="academic-list-items"> {{ data }} </li>
+                                {% endfor %}
+                            </div>
+                        </ul>
+                    </div>
+                {% endif %}
+                {% if academic_senior %}
+                    <div class="academic-senior">
+                        <h3 class="academic-heading">SENIOR SCHOOL</h3>
+                        <div class="senior-content">
+                            {% for data in academic_senior %}
+                                {% if "general" in data.title %}
+                                    <ul class="general">
+                                        <h4 class="academic-heading2">GENERAL SUBJECTS</h4>
+                                        {% for value in data.content %}
+                                            <li class="academic-list-items"> {{ value }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% if "commercial" in data.title %}
+                                    <ul class="commercial">
+                                        <h4 class="academic-heading2">COMMERCIAL SUBJECTS</h4>
+                                        {% for value in data.content %}
+                                            <li class="academic-list-items"> {{ value }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% if "arts" in data.title %}
+                                    <ul class="arts">
+                                        <h4 class="academic-heading2">ARTS SUBJECTS</h4>
+                                        {% for value in data.content %}
+                                            <li class="academic-list-items"> {{ value }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% if "science" in data.title %}
+                                    <ul class="science">
+                                        <h4 class="academic-heading2">SCIENCE SUBJECTS</h4>
+                                        {% for value in data.content %}
+                                            <li class="academic-list-items"> {{ value }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% if "trade" in data.title %}
+                                    <ul class="trade">
+                                        <h4 class="academic-heading2">ELECTIVE SUBJECTS (TRADE)</h4>
+                                        {% for value in data.content %}
+                                            <li class="academic-list-items"> {{ value }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                {% if "all" in data.title %}
+                                    <ul class="elective">
+                                        <h4 class="academic-heading2">ELECTIVE SUBJECTS (GENERAL)</h4>
+                                        {% for value in data.content %}
+                                            <li class="academic-list-items"> {{ value }} </li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% comment %} {% endif %} {% endcomment %}
+{% endblock content %}

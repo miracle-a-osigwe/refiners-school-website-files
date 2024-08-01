@@ -1,0 +1,226 @@
+{% load i18n static %}<!DOCTYPE html>
+{% get_current_language as LANGUAGE_CODE %}{% get_current_language_bidi as LANGUAGE_BIDI %}
+<html lang="{{ LANGUAGE_CODE|default:"en-us" }}" dir="{{ LANGUAGE_BIDI|yesno:'rtl,ltr,auto' }}">
+<head>
+
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="icon" type="image/png" href="{{ MEDIA_URL }}/favicon.ico"/>
+    <link rel="stylesheet" href="{% block stylesheet %}{% static "core/css/base.css" %}{% endblock %}">
+    <link rel="stylesheet" href="{% block extra_styles %}{% endblock %}">
+    {% block dark-mode-vars %}
+        <link rel="stylesheet" href="{% static "core/css/dark_mode.css" %}">
+    {% endblock %}
+    {% if not is_popup and is_nav_sidebar_enabled %}
+        <link rel="stylesheet" href="{% static "core/css/nav_sidebar.css" %}">
+        <script src="{% static "core/js/nav_sidebar.js" %}" defer></script>
+    {% endif %}
+    {% block extrastyle %}<link rel="stylesheet" href="{% static "core/css/content.css" %}">{% endblock %}
+    {% if LANGUAGE_BIDI %}<link rel="stylesheet" href="{% block stylesheet_rtl %}{% static "core/css/rtl.css" %}{% endblock %}">{% endif %}
+    {% block extrahead %}{% endblock %}
+    {% block responsive %}
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
+        <link rel="stylesheet" href="{% static "core/css/responsive.css" %}">
+        {% if LANGUAGE_BIDI %}<link rel="stylesheet" href="{% static "core/css/responsive_rtl.css" %}">{% endif %}
+    {% endblock %}
+    {% block blockbots %}<meta name="robots" content="NONE,NOARCHIVE">{% endblock %}
+    {% block head %}{% endblock head %}
+    <script src="{% static "core/js/content.js" %}"></script>
+</head>
+
+<body class="{% if is_popup %} popup {% endif %}{% block bodyclass %}{% endblock %}" data-admin-utc-offset="{% now "Z" %}">
+
+    <!-- Container -->
+    <div id="container">
+
+        {% if not is_popup %}
+            <!-- Header -->
+            {% block header %}
+                <div id="header">
+                    {% block branding %}
+                        <div id="branding">            
+                            <img src="{{ MEDIA_URL }}/logo-1.png" alt="Refiners schools logo">
+                        </div>
+                    {% endblock %}
+                    {% block usertools %}
+                        {% if has_permission %}
+                            <div id="user-tools">
+                                {% block welcome-msg %}
+                                    {% translate 'Welcome,' %}
+                                    <strong>{% firstof user.get_short_name user.get_username %}</strong>.
+                                {% endblock %}
+                                {% block userlinks %}
+                                    {% if site_url %}
+                                        <a href="{{ site_url }}">{% translate 'View site' %}</a> /
+                                    {% endif %}
+                                    {% if user.is_active and user.is_staff %}
+                                        {% url 'django-admindocs-docroot' as docsroot %}
+                                        {% if docsroot %}
+                                            <a href="{{ docsroot }}">{% translate 'Documentation' %}</a> /
+                                        {% endif %}
+                                    {% endif %}
+                                    {% if user.has_usable_password %}
+                                        <a href="{% url 'admin:password_change' %}">{% translate 'Change password' %}</a> /
+                                    {% endif %}
+                                    <form id="logout-form" method="post" action="{% url 'admin:logout' %}">
+                                        {% csrf_token %}
+                                        <button type="submit">{% translate 'Log out' %}</button>
+                                    </form>
+                                
+                                {% endblock %}
+                            </div>
+                        {% elif user.is_authenticated and not has_permission %}
+                            <div id="user-tools">
+                                <a href="{% url 'profile' pk=user.pk %}" class="sidemenu side-element">Edit Profile</a>
+                                <!-- <a href="{% url 'home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a> -->
+                                {% if user.user_role == 1 %}
+                                    {% for subject in list_assessment%}
+                                        {% if user in subject.class_owner %}
+                                            {% comment %} <span class="course-item"><a href="{% url 'mcq:list' pk=course.pk %}">{{subject}}</a></span> {% endcomment %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% else %}
+                                    {% comment %} <a href="{% url 'mcq:list' %}"><i class="fa fa-list-ul" aria-hidden="true"></i>All Assessments</a>
+                                    <a href="{% url 'mcq:create' %}"><i class="fa fa-plus-circle" aria-hidden="true" {% endcomment %}
+                                    {% comment %} style="color: #5cb85c;font-size: 20px;"></i> Create New Assessment</a> {% endcomment %}
+                                    
+                                    {% for subject in list_assessment %}
+                                        {% if user.id == subject.author.id %}
+                                            {% comment %} <span class="course-item"><a href="{% url 'mcq:list' pk=.pk %}">{{subject}}</a></span> {% endcomment %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endif %}
+                                    <a href="{% url 'accounts:logout' %}" class="sidemenu"><i class="fa fa-sign-out" aria-hidden="true"></i>Logout</a>
+                            </div>
+                        {% else %}
+                            <div id='home-button'>
+                                {% block home_tag %}
+                                    <div class="home_tag">
+                                        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+                                    </div>
+                                {% endblock home_tag %}
+                                {% block aboutus_tag %}
+                                    <div class="about_us_tag">
+                                        <a href="{% url 'core:about' %}">About Us</a>
+                                    </div>
+                                {% endblock aboutus_tag %}
+                                {% block admission_tag %}
+                                    <div class="admission_tag">
+                                        <a href="{% url 'core:admission' %}">Admission</a>
+                                    </div>
+                                {% endblock admission_tag %}
+                                {% block academic_tag %}
+                                    <div class="academic_tag">
+                                        <a href="{% url 'core:academics' %}">Academics</a>
+                                    </div>
+                                {% endblock academic_tag %}
+                                
+                                {% block login %}
+                                    <div id="login_dir" class="breadcrumbs">
+                                        <a href="{% url 'accounts:login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a>
+                                    </div>
+                                {% endblock login %}
+                            </div>
+                        {% endif %}
+                    {% endblock %}
+                    
+                    {% block div_block %}
+                    <!-- <div>
+
+                    </div> -->
+                    {% endblock div_block %}
+                    {% block nav-global %}{% endblock %}
+                    {% block breadcrumbs %}
+                    <div class="breadcrumbs">
+                    <a href="{% url 'admin:index' %}">{% translate 'Admin Dashboard' %}</a>
+                    {% if title %} &rsaquo; {{ title }}{% endif %}
+                    </div>
+                    {% endblock %}
+                </div>
+            {% endblock %}
+            <!-- END Header -->
+        
+        {% endif %}
+
+        <!-- VISUAL SECTION FOR THE IMAGES OR VIDEOS -->
+        {% block visual %}
+        {% endblock visual %}
+
+        <div class="main" id="main">
+          {% if not is_popup and is_nav_sidebar_enabled %}
+            {% block nav-sidebar %}
+              {% include "admin/nav_sidebar.html" %}
+            {% endblock %}
+          {% endif %}
+            <div class="content">
+                {% block content-main %}
+                    {% block messages %}
+                    {% if messages %}
+                        <ul class="messagelist">{% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message|capfirst }}</li>
+                        {% endfor %}</ul>
+                    {% endif %}
+                    {% endblock messages %}
+                    <!-- Content -->
+                    {% block right_content %}
+                        <div class="right-content"> 
+
+                        </div>
+                    {% endblock right_content %}
+                
+                    <div id="content" class="{% block coltype %}colM{% endblock %}">
+                        {% block pretitle %}{% endblock %}
+                        {% block content_title %}{% if title %}<h1>{{ title }}</h1>{% endif %}{% endblock %}
+                        {% block content_subtitle %}{% if subtitle %}<h2>{{ subtitle }}</h2>{% endif %}{% endblock %}
+                        {% block content %}
+                            {% block object-tools %}{% endblock %}
+                            {{ content }}
+                        {% endblock %}
+                        {% block notice %}
+                            <div class="popup" id="popup">
+                                <div class="popup-image" id="popup-image"></div>
+                                <div class="popup-content" id="popup-content"></div>
+                                <span class="popup-close" id="popup-close">Close</span>
+                            </div>
+                            <div class="overlay" id="overlay"></div>
+                        {% endblock notice %}
+                        {% block sidebar %}{% endblock %}
+                        <br class="clear">
+                    </div>
+                    <!-- END Content -->
+                 {% endblock content-main %}
+            </div>
+        </div>
+        <div id="footer">
+            {% block footer %}
+                {% comment %} <script src="{% static "core/js/core.js" %}" defer></script> {% endcomment %}
+                <!-- <div class="other-details">
+    
+                </div> -->
+                <div class="footer-links">
+                    {% block new_event_tag %}
+                        <div class="new_event_tag">
+                            <a href="{% url 'core:news' %}">News and Events</a>
+                        </div>
+                    {% endblock new_event_tag %}
+                    {% block alumni_tag %}
+                        <div class="alumni_tag">
+                            <a href="{% url 'core:alumni' %}">Alumni</a>
+                        </div>
+                    {% endblock alumni_tag %}
+                    {% block resources_tag %}
+                        <div class="resources_tag">
+                            <a href="{% url 'core:resources' %}">Resources</a>
+                        </div>
+                    {% endblock resources_tag %}
+                    {% block facility_tag %}
+                        <div class="facility_tag">
+                            <a href="{% url 'core:facilities' %}">Facilities</a>
+                        </div>
+                    {% endblock facility_tag %}
+                </div>
+            {% endblock footer %}
+        </div>
+    </div>
+    <!-- END Container -->
+</body>
+</html>

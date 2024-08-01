@@ -1,0 +1,98 @@
+{% extends 'core/home.html' %}
+
+{% block title %}
+    RHS - Profile
+{% endblock title %}
+
+<!-- <a href="{% url 'accounts:logout' %}">Logout</a> -->
+
+{% block home_tag %}
+        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+{% endblock home_tag %}
+
+{% block content %}
+    {{ block.super }}
+    <div class="container">
+        {% if user.is_authenticated %}
+            <i class="fa fa-user-circle-o fa-5x" aria-hidden="true"></i>
+            <h1>Registration Number: {{user.username}}</h1>
+            <h4>First Name: {{user.firstName}}</h4>
+            <h4>Last Name: {{user.lastName}}</h4>
+            
+            <h4>Role: 
+            {% if user.role == 1 %}
+                Student
+            {% elif user.role == 2 %}
+                Teacher
+            {% elif user.role == 3 %}
+                Admin
+            {% endif %}
+            </h4>
+            
+            {% if user.role == 2 %}
+                <div class="card-deck">
+                {% for assessment in assessment_list %}
+                    
+                    {% if assessment.author_id == user.id %}
+                        <div class="card" style="width: 18rem">
+                            <div class="card-body">
+                            <h5 class="card-title">{{assessment.name}}</h5>
+                            <h6 class="card-subtitle mb-2 text-muted">{{assessment.author}}</h6>
+                            <p class="card-text">
+                                {{assessment.title}}
+                            </p>
+                            <a href="{% url 'mcq:assessment' id=assessment.pk %}" 
+                            class="btn btn-primary card-link">More Info</a>
+                            <p>{{course.students.count}}
+                                    member{{course.students.count|pluralize}}</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                
+                {% empty %}
+                    <div class="jumbotron">
+                        You have not created any courses yet.
+                    </div>
+                {% endfor %}
+                </div>
+            {% elif user.user_type == 1 %}
+                <div class="card-deck">
+                    {% for course in course_list %}
+                        
+                        {% if user in course.students.all %}
+                            <div class="card" style="width: 18rem">
+                                <div class="card-body">
+                                <h5 class="card-title">{{course.course_name}}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{course.teacher}}</h6>
+                                <p class="card-text">
+                                    {{course.course_description}}
+                                </p>
+                                <a href="{% url 'courses:detail' pk=course.pk %}" class="btn btn-primary card-link">More Info</a>
+                                <a href="{% url 'courses:unenroll' pk=course.pk %}" class="btn btn-danger card-link">Unenroll</a>
+                                <p>{{course.students.count}}
+                                        member{{course.students.count|pluralize}}</p>
+                                </div>
+                            </div>
+                        {% endif %}
+                
+                    {% empty %}
+                        <div class="jumbotron">
+                            You have not enrolled in any courses yet.
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% else %}
+            <div class="jumbotron">
+                You cannot access this profile.
+            </div>
+        {% endif %}
+
+    </div>
+    <!-- {% endblock %} -->
+{% endblock content %}
+    
+<!-- <h1>My profile</h1>
+<p>
+    Welcome, {{ object }}
+</p> -->

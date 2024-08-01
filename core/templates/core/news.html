@@ -1,0 +1,59 @@
+{% extends 'core/home.html' %}
+{% block title %}
+    News
+{% endblock title %}
+
+{% block home_tag %}
+    <div class="home_tag">
+        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+    </div>
+{% endblock home_tag %}
+
+{% block visual %}
+{% endblock %}
+
+{% comment %} {% block content_title %}
+LATEST NEWS
+{% endblock content_title %} {% endcomment %}
+
+{% block content %}
+    <div class="column center">
+        <div class="news-tag">WELCOME TO REFINERS SCHOOLS NEWS/EVENT PAGE.</div>
+        <div class='events'>
+            {% if events %}
+                <div class='section-header'>
+                    <h2>UPCOMING EVENTS</h2>
+                </div>
+                {% for event in events %}
+                    <div class='event'>
+                        {% if event.img %}
+                            <div class="event-img">
+                                <img class="event-image" src={{ media_url }}/{{ event.img }} alt={{ event.tag }}>
+                            </div>
+                        {% endif %}
+                        <div  class="event-div">
+                            <div class="event-title-div">
+                                <h3 class="event-title"> {{ event.title | upper }} </h3>
+                            </div>
+                            <div class="text-content event-content" data-fulltext="">
+                                <script class="full-text-data" type="application/json">
+                                    {{ event.content }}
+                                </script>
+                                {{ event.content | truncatewords:20}}
+                            </div>
+                            {% if event.url %}
+                                <div class="event-url">
+                                    <hr class="url-line">
+                                    <a class="event-anchor-url" href={{ event.url }}>Click me for more info</a>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+{% endblock content %}
+
+<!-- {% block news_event_tag %}
+{% endblock %} -->

@@ -1,0 +1,80 @@
+{% extends "core/home.html" %}
+{% load i18n static %}
+{% block title %}
+    Admission
+{% endblock title %}
+
+{% block header %}
+    {{ block.super }}
+    <script src=" {% static "core/js/admission_form.js" %}"></script>
+{% endblock header %}
+
+{% block home_tag %}
+    <div class="home_tag">
+        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+    </div>
+{% endblock home_tag %}
+
+{% block admission_tag %}
+{% endblock %}
+
+{% block visual %}
+{% endblock %}
+
+{% block content %}
+    <div class="admission-column center">
+        <form action="{% url 'core:admission' %}" method="POST" class="admission-form"> 
+            {% comment %} onsubmit="submitForm(event)"> {% endcomment %}
+            <div class="form-container">
+                {% csrf_token %}
+                {% if candidate_form %}
+                    <div class="candidate-info">
+                        <div class='section-header'>
+                            <h2>CANDIDATE INFORMATION</h2>
+                        </div>
+                        <div class="candidate-data">
+                            {{ candidate_form.label_tags }}{{ candidate_form }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if candidate_previous_school %}
+                    <div class="candidate-previous-school">
+                        <div class="section-header">
+                            <h2>CANDIDATE PREVIOUS SCHOOL</h2>
+                        </div>
+                        <div class="candidate-data">
+                            {{ candidate_previous_school.label_tags }}{{ candidate_previous_school }}
+                        </div>
+                    </div>
+                {% endif %}
+                {% if parent_form %}
+                    <div class="parent-form">
+                        <div class="section-header">
+                            <h2>PARENT DETAILS</h2>
+                        </div>
+                        <div class="candidate-data">
+                            {{ parent_form.label_tags }}{{ parent_form }}
+                        </div>
+                    </div>
+                {% endif %}
+                <div class="form-button">
+                    <button type="submit">Submit</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
+{% block notice %}
+    {% if message %}
+        {{ block.super }}
+        <script class="message-data" type="application/json">
+            {{ message }}
+        </script>
+        addMessage();
+    {% else %}
+        {% if errors %}
+            {{ block.super }}
+            addMessage(errors);
+        {% endif %}
+    {% endif %}
+{%endblock notice %}

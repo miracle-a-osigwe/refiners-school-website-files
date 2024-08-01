@@ -1,0 +1,163 @@
+{% extends "core/home.html" %}
+{% block title %}
+    About us
+{% endblock title %}
+
+{% block home_tag %}
+    <div class="home_tag">
+        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+    </div>
+{% endblock home_tag %}
+{% block aboutus_tag %}
+{% endblock aboutus_tag %}
+{% block visual %}
+{% endblock visual %}
+{% block content %}
+    {% if about_us_data_all %}
+        <div class="column center">
+            <div class="about-container">
+                <div class="about-us">
+                    <h2>ABOUT REFINERS SCHOOLS</h2>
+                </div>
+                <div id='about-main'> 
+                    {% for about_us_data in about_us_data_all %}
+                        {% if about_us_data.title == "welcome" %}
+                            <div class="about-main" data-order="1">
+                                <div class="about-head-tag about-welcome">
+                                    <h2 class="about-us-h2">Welcome message</h2>
+                                </div>
+                                <div class="about-head-content">
+                                    {{ about_us_data.content | safe }}
+                                </div>
+                            </div>
+                        {% elif about_us_data.title == "motto" %}
+                            <div class="about-main" data-order="2">
+                                <div class="about-head-tag about-motto">
+                                    <h2 class="about-us-h2">Our motto</h2>
+                                </div>
+                                <div class="about-head-content">
+                                    {{ about_us_data.content | safe }}
+                                </div>
+                            </div>
+                        {% elif about_us_data.title == "staff" %}
+                            <div class="about-main" data-order="3">
+                                <div class="about-head-tag about-staff">
+                                    <h2 class="about-us-h2">Our staff</h2>
+                                </div>
+                                <div class="about-head-content">
+                                    {{ about_us_data.content | safe }}
+                                </div>
+                            </div>
+                        {% elif about_us_data.title == "curriculum" %}
+                            <div class="about-main" data-order="4">
+                                <div class="about-head-tag about-curriculum">
+                                    <h2 class="about-us-h2">Our curriculum</h2>
+                                </div>
+                                <div class="about-head-content">
+                                    {{ about_us_data.content | safe }}
+                                </div>
+                            </div>
+                        {% elif about_us_data.title == "what more" %}
+                            <div class="about-main" data-order="5">
+                                <div class="about-head-tag about-more">
+                                    <h2 class="about-us-h2">What more?</h2>
+                                </div>
+                                <div class="about-head-content">
+                                    {{ about_us_data.content | safe }}
+                                </div>
+                            </div>
+                        {% elif about_us_data.title == "premium" %}
+                            <div class="about-main" data-order="6">
+                                <div class="about-head-tag about-premium">
+                                    <h2 class="about-us-h2">Get our premium education service.</h2>
+                                </div>
+                                <div class="about-head-content">
+                                    {{ about_us_data.content | safe  }}
+                                </div>
+                                {% if about_us_data.url %}
+                                    <div class="about-us-url"> {{ about_us_data.url }}</div>
+                                {% endif %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% comment %} {{ about_us_data.content | safe }}     {% endcomment %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    </br>
+    {% if mission %}
+        <div class="column center about-mvc">
+            <div class="mission">
+                <div class="about-grid">
+                    <h2>MISSION</h2>
+                </div>
+                <div class="about-grid-content">
+                    {{ mission.content }}
+                </div>
+            </div>
+        {% endif %}
+        </br>
+        {% if vision %}
+            <div class="vision">
+                <div  class="about-grid">
+                    <h2>VISION</h2>
+                </div>
+                <div class="about-grid-content">
+                    {{ vision.content }}
+                </div>
+            </div>
+        {% endif %}
+        </br>
+        {% if core_values %}
+            <div class="about_us">
+                <div  class="about-grid">
+                    <h2>CORE VALUES</h2>
+                </div>
+                <div class="about-grid-content core-values-div">
+                    <ul>
+                        {% for value in core_values.content %}
+                            <li>
+                                {{ value | capfirst }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        {% endif %}
+        </div>
+    </br>
+    {% if school_anthem %}
+        <div class="column center about-acr">
+            <div class="about_us duties-div">
+                <div>
+                    <h2>SCHOOL ANTHEM</h2>
+                </div>
+                <div class="duties-content">
+                    {{ school_anthem.content | safe }}
+                </div>
+            </div>
+            {% endif %}
+        {% if school_creed %}
+            <div class="about_us duties-div">
+                <div>
+                    <h2>SCHOOL CREED</h2>
+                </div>
+                <div class="duties-content">
+                    {{ school_creed.content | safe }}
+                </div>
+            </div>
+        {% endif %}
+        {% if school_responsibility_pledge %}
+            <div class="about_us duties-div">
+                <div>
+                    <h2>SCHOOL RESPONSIBILITY PLEDGE</h2>
+                </div>
+                <div class="duties-content">
+                    {{ school_responsibility_pledge.content | safe }}
+                </div>
+            </div>
+        {% endif %}
+        </div>
+{% endblock content %}

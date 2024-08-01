@@ -1,0 +1,14 @@
+[
+    {
+        "model": "accounts.user",
+        "fields": {
+            "username" : "",
+            "firstName" : "",
+            "lastName" : "",
+            "password" : "",
+            "gender" : "M",
+            "role" : 1
+        }
+    }
+
+]

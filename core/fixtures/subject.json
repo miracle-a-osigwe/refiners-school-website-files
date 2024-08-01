@@ -1,0 +1,298 @@
+[
+    {
+        "model" : "core.subject",
+        "pk" : 1,
+        "fields" : {
+            "category": 1,
+            "name" : "English Language"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 2,
+        "fields": {
+            "category": 1,
+            "name": "Mathematics"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 3,
+        "fields": {
+            "category": 1,
+            "name": "Civic Education"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 4,
+        "fields": {
+            "category": 1,
+            "name": "Basic Science"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 5,
+        "fields": {
+            "category": 1,
+            "name": "Business Studies"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 6,
+        "fields": {
+            "category": 1,
+            "name": "Christian Religion Knowledge"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 7,
+        "fields": {
+            "category": 1,
+            "name": "Computer Studies"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 8,
+        "fields": {
+            "category": 1,
+            "name": "Social Studies"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 9,
+        "fields": {
+            "category": 1,
+            "name": "French Studies"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 10,
+        "fields": {
+            "category": 1,
+            "name": "Home Economics"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 11,
+        "fields": {
+            "category": 1,
+            "name": "Basic Technology"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 12,
+        "fields": {
+            "category": 1,
+            "name": "Agricultural Science"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 13,
+        "fields": {
+            "category": 1,
+            "name": "Yoruba Studies"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 14,
+        "fields": {
+            "category": 1,
+            "name": "Physical and Health Education"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 15,
+        "fields": {
+            "category": 1,
+            "name": "Music"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 16,
+        "fields": {
+            "category": 1,
+            "name": "Cultural and Creative Arts"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 17,
+        "fields": {
+            "category": 2,
+            "name": "Literature in English"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 18,
+        "fields": {
+            "category": 2,
+            "name": "Economics"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 19,
+        "fields": {
+            "category": 2,
+            "name": "Government"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 20,
+        "fields": {
+            "category": 2,
+            "name": "Further Mathematics"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 21,
+        "fields": {
+            "category": 2,
+            "name": "Biology"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 22,
+        "fields": {
+            "category": 2,
+            "name": "Food and Nutrition"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 23,
+        "fields": {
+            "category": 2,
+            "name": "Painting and Decorating"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 24,
+        "fields": {
+            "category": 2,
+            "name": "Commerce"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 25,
+        "fields": {
+            "category": 2,
+            "name": "Financial Accounting"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 26,
+        "fields": {
+            "category": 2,
+            "name": "Marketing"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 27,
+        "fields": {
+            "category": 2,
+            "name": "Garment Making"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 28,
+        "fields": {
+            "category": 2,
+            "name": "Physics"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 29,
+        "fields": {
+            "category": 2,
+            "name": "Chemistry"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 30,
+        "fields": {
+            "category": 2,
+            "name": "English Language"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 31,
+        "fields": {
+            "category": 2,
+            "name": "Mathematics"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 32,
+        "fields": {
+            "category": 2,
+            "name": "Civic Education"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk":33,
+        "fields": {
+            "category": 2,
+            "name": "Christian Religion Knowledge"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 34,
+        "fields": {
+            "category": 2,
+            "name": "Computer Studies"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 35,
+        "fields": {
+            "category": 2,
+            "name": "French Studies"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 36,
+        "fields": {
+            "category": 2,
+            "name": "Agricultural Science"
+        }
+    },
+    {
+        "model": "core.subject",
+        "pk": 37,
+        "fields": {
+            "category": 1,
+            "name": "History"
+        }
+    }
+]

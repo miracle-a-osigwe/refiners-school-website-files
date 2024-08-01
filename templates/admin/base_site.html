@@ -1,0 +1,10 @@
+{% extends "main_base.html" %}
+
+{% block title %}{% if subtitle %}{{ subtitle }} | {% endif %}{{ title }} | {{ site_title|default:_('RHS Site Admin') }}{% endblock %}
+
+{% block branding %}
+<h1 id="site-name"><a href="{% url 'admin:index' %}">Refiners High School Admin Page</a></h1>
+{% endblock %}
+{% block div_block %}{% endblock div_block %}
+
+{% block nav-global %}{% endblock %}

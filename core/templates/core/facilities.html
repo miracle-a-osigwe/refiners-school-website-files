@@ -1,0 +1,58 @@
+{% extends 'core/home.html' %}
+{% block title %}
+    Facilities
+{% endblock title %}
+
+{% block visual %}
+{% endblock %}
+
+{% block home_tag %}
+    <div class="home_tag">
+        <a href="{% url 'core:home' %}"><i class="fa fa-home" aria-hidden="true"></i>Home</a>
+    </div>
+{% endblock home_tag %}
+
+{% block content-main %}
+    <div id="gallery">
+            {% if building %}
+                <h2 class="gallery-header">SCHOOL FACILITIES</h2>
+                    {% for image in building %}
+                        <div class="gallery-image">        
+                            <img src=../{{ media_url }}/{{ image.img }} alt="School facilities" class="img-gallery">
+                            <div class="img-title-gallery img-title">
+                                <h2>{{ image.img_title | upper }}</h2>
+                                <p>{{ image.img_tag }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+            {% endif %}
+            {% if labs_images %}
+                <h2 class="gallery-header">SCHOOL LABS/WORKSHOPS</h2>
+                    {% for image in labs_images %}
+                        <div class="gallery-image">
+                            <img src=../{{ media_url }}/{{ image.img }} alt="School labs and workshops" class="img-gallery">
+                            <div class="img-title-gallery img-title">
+                                <h2>{{ image.img_title | upper }}</h2>
+                                <p>{{ image.img_tag }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+            {% endif %}
+            {% if sports_images %}
+                <h2 class="gallery-header">SPORTS FACILITIES</h2>
+                    {% for image in sports_images %}
+                        <div class="gallery-image">
+                            <img src=../{{ media_url }}/{{ image.img }} alt="Sporting facilities" class="img-gallery">
+                            <div class="img-title-gallery img-title">
+                                <h2>{{ image.img_title | upper }}</h2>
+                                <p>{{ image.img_tag }}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+            {% endif %}
+        {% comment %} </div> {% endcomment %}
+    </div>
+    {% block notice %}
+        {{ block.super }}
+    {% endblock notice %}
+{% endblock content-main %}

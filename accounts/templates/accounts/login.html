@@ -1,0 +1,136 @@
+{% extends 'core/home.html'%}
+{% load i18n static %}
+{% block head %}
+	<title> 
+		{% block title %} 
+			Login
+		{% endblock title %}
+	</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="{% static "accounts/images/icons/favicon.ico" %}"/>
+<!--===============================================================================================-->
+	<!-- <link rel="stylesheet" type="text/css" href="{% static "accounts/vendor/bootstrap/css/bootstrap.min.css" %}"> -->
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static "accounts/fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static "accounts/vendor/animate/animate.css" %}">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="{% static "accounts/vendor/css-hamburgers/hamburgers.min.css" %}">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="{% static "accounts/vendor/select2/select2.min.css" %}">
+<!--===============================================================================================-->
+	{% comment %} <link rel="stylesheet" type="text/css" href="{% static "accounts/css/main.css" %}"> {% endcomment %}
+	<link rel="stylesheet" type="text/css" href="{% static "accounts/css/util.css" %}">
+<!--===============================================================================================-->
+
+{% block extrastyle %}{{ block.super }}
+{{ form.media }}
+{% endblock %}
+
+{% endblock head %}
+{% block visual %}
+{% endblock %}
+{% block content %}
+<!-- {% block login %} {% endblock %} -->
+    <!-- {% block branding %}
+    
+    {% endblock %} -->
+	{% if user.is_authenticated %}
+		<div class="container">
+			<div class="container-user">
+				<h3>You are already logged in</h3>
+				<form id="logout-form" method="post" action="{% url 'accounts:logout' %}">
+					{% csrf_token %}
+					<button type="submit">{% translate 'Log out' %}</button>
+				</form>
+			</div>
+		</div>
+	{% else %}
+	<!-- <div class="limiter"> -->
+		<div class="container-login100 others">
+			<div class="wrap-login100">
+				<div class="login100-pic js-tilt" data-tilt>
+					<img src="{% static "accounts/images/logo.jpg" %}" alt="IMG">
+				</div>
+				<form action="{{ app_path }}" method="post" class="login100-form validate-form">{% csrf_token %}
+					<span class="login100-form-title">
+						Sign In
+					</span>
+					<span class="errormessage">
+						{% if form.errors and not form.non_field_errors %}
+						<p class="errornote">
+							{% if form.errors.items|length == 1 %}
+							{% translate "Please correct the error below." %}
+							{% else %}
+							{% translate "Please correct the errors below." %}
+							{% endif %}
+						</p>
+						{% endif %}
+						{% if form.non_field_errors %}
+						{% for error in form.non_field_errors %}
+						<p class="errornote">
+							{{ error }}
+						</p>
+						{% endfor %}
+						{% endif %}
+					</span>
+					
+					<div class="wrap-input100 validate-input" data-validate = "Valid registration number is required: ex@abc.xyz">
+						<!-- {{ form.username.errors }} -->
+						<input class="input100" type="text" name="username" placeholder="Registration Number">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-envelope" aria-hidden="true"></i>
+						</span>
+						
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate = "Password is required">
+						<!-- {{ form.password.errors }} -->
+						<input class="input100" type="password" name="password" placeholder="Password">
+						<span class="focus-input100"></span>
+						<span class="symbol-input100">
+							<i class="fa fa-lock" aria-hidden="true"></i>
+						</span>
+						
+					</div>
+					
+					<div class="container-login100-form-btn">
+						<button class="login100-form-btn">
+							Login
+						</button>
+					</div>
+
+					<div class="text-center p-t-12">
+						<span class="txt1">
+							Forgot
+						</span>
+						<a class="txt2" href="#">
+							Password?
+						</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	<!-- </div> -->
+	{% endif %}
+	
+<!--===============================================================================================-->	
+	<script src="{% static "accounts/vendor/jquery/jquery-3.2.1.min.js" %}"></script>
+<!--===============================================================================================-->
+	<!-- <script src="{% static "accounts/vendor/bootstrap/js/popper.js" %}"></script>
+	<script src="{% static "accounts/vendor/bootstrap/js/bootstrap.min.js" %}"></script> -->
+<!--===============================================================================================-->
+	<script src="{% static "accounts/vendor/select2/select2.min.js" %}"></script>
+<!--===============================================================================================-->
+	<script src="{% static "accounts/vendor/tilt/tilt.jquery.min.js" %}"></script>
+	<script >
+		$('.js-tilt').tilt({
+			scale: 1.1
+		})
+	</script>
+<!--===============================================================================================-->
+	<script src="{% static "accounts/js/main.js" %}"></script>
+{% endblock content %}
